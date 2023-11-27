@@ -1,0 +1,15 @@
+services:
+  mongo_node_02:
+    image: mongo:4.1.9
+    entrypoint: [ "mongod","--port","27019", "--bind_ip_all", "--replSet", "rs0" ]
+    container_name: 'mongo_instance_master'
+    restart: unless-stopped
+    environment:
+      - MONGO_REPLICA_SET_NAME=rs0
+    ports:
+      - 27019:27019
+    networks:
+      - booking-network
+networks:
+  airbnb-network:
+    driver: bridge
